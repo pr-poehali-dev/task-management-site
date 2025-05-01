@@ -1,4 +1,35 @@
+
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #4a85f0;
+  --primary-light: #6b9df2;
+  --completed: #2ecc71;
+  --in-progress: #ff9941;
+  --new: #4a85f0;
+  --background: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --border-color: #eaeaea;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+}
+
 @tailwind components;
 @tailwind utilities;
 
