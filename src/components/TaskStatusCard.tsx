@@ -1,52 +1,52 @@
 
 import React from 'react';
-import { CheckCircle, Clock, ListPlus } from 'lucide-react';
-import Icon from './ui/icon';
+import { CheckCircleIcon, ClockIcon, ListIcon } from 'lucide-react';
 
 interface TaskStatusCardProps {
   status: 'completed' | 'in-progress' | 'new';
   count: number;
 }
 
-const statusConfig = {
-  completed: {
-    title: 'Завершено',
-    icon: 'CheckCircle',
-    color: 'text-[#2ecc71]',
-    description: 'задач выполнено',
-    iconBg: 'bg-[#2ecc71]/10'
-  },
-  'in-progress': {
-    title: 'В процессе',
-    icon: 'Clock',
-    color: 'text-[#ff9941]',
-    description: 'задач выполняются',
-    iconBg: 'bg-[#ff9941]/10'
-  },
-  new: {
-    title: 'Новые',
-    icon: 'ListPlus',
-    color: 'text-[#4a85f0]',
-    description: 'задач не начаты',
-    iconBg: 'bg-[#4a85f0]/10'
-  }
-};
-
 const TaskStatusCard: React.FC<TaskStatusCardProps> = ({ status, count }) => {
-  const config = statusConfig[status];
-  
+  const getStatusInfo = () => {
+    switch (status) {
+      case 'completed':
+        return {
+          title: 'Завершено',
+          subtitle: 'задач выполнено',
+          icon: <CheckCircleIcon className="text-green-500" size={24} />,
+        };
+      case 'in-progress':
+        return {
+          title: 'В процессе',
+          subtitle: 'задач выполняются',
+          icon: <ClockIcon className="text-orange-500" size={24} />,
+        };
+      case 'new':
+        return {
+          title: 'Новые',
+          subtitle: 'задач не начаты',
+          icon: <ListIcon className="text-blue-500" size={24} />,
+        };
+      default:
+        return {
+          title: 'Задачи',
+          subtitle: 'всего задач',
+          icon: null,
+        };
+    }
+  };
+
+  const { title, subtitle, icon } = getStatusInfo();
+
   return (
-    <div className="card flex flex-col">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-medium">{config.title}</h3>
-        <div className={`${config.iconBg} p-2 rounded-full ${config.color}`}>
-          <Icon name={config.icon as any} size={20} />
-        </div>
+    <div className="bg-white rounded-lg p-6 shadow-sm">
+      <div className="flex justify-between items-start mb-4">
+        <div className="text-lg font-medium">{title}</div>
+        {icon}
       </div>
-      <div>
-        <span className="text-5xl font-bold">{count}</span>
-        <p className="text-sm text-gray-500 mt-1">{config.description}</p>
-      </div>
+      <div className="text-4xl font-bold mb-1">{count}</div>
+      <div className="text-gray-500 text-sm">{subtitle}</div>
     </div>
   );
 };

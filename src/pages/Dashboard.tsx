@@ -42,7 +42,28 @@ const Dashboard: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ProgressBar completed={taskStats.completed} total={taskStats.total} />
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            <h3 className="text-lg font-medium mb-1">Общий прогресс выполнения</h3>
+            <p className="text-sm text-gray-500 mb-4">Процент выполненных задач от общего количества</p>
+            
+            <ProgressBar completed={taskStats.completed} total={taskStats.total} />
+            
+            <div className="flex justify-between mt-6 text-center">
+              <div>
+                <p className="text-gray-500 mb-1">Всего</p>
+                <p className="text-2xl font-semibold">{taskStats.total}</p>
+              </div>
+              <div>
+                <p className="text-gray-500 mb-1">Завершено</p>
+                <p className="text-2xl font-semibold">{taskStats.completed}</p>
+              </div>
+              <div>
+                <p className="text-gray-500 mb-1">Осталось</p>
+                <p className="text-2xl font-semibold">{taskStats.total - taskStats.completed}</p>
+              </div>
+            </div>
+          </div>
+          
           <DailyProgressChart data={weeklyProgressData} />
         </div>
       </main>
